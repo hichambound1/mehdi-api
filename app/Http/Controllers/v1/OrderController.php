@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Agente_order;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -14,7 +16,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return Order::all();
+
     }
 
     /**
@@ -35,7 +38,25 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'description' => 'required',
+            'user_id' => 'required',
+            'sous_category_id' => 'required',
+            'nbr_hours' => 'required',
+            'prix_total' => 'required',
+            'time' => 'required',
+        ]);
+
+        $order =Order::create($request->all());
+
+        $order_id= $order->id;
+        foreach($request->workers as $worker){
+            Agente_order::create([
+                'order_id'=>$order_id,
+                'agente_id'=>$worker,
+            ]);
+        }
+        return $order;
     }
 
     /**
@@ -46,7 +67,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        return Order::find($id);
     }
 
     /**
@@ -80,6 +101,6 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Order::destroy($id);
     }
 }

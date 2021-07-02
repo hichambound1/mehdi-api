@@ -8,11 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
-    // protected $fillable = [
-    //     'name',
-    //     'prenom',
-    //     'phone',
-    // ];
+    protected $fillable = [
+        'description',
+        'user_id',
+        'sous_category_id',
+        'nbr_hours',
+        'prix_total',
+        'time',
+    ];
     private function agentes()
     {
         return $this->belongsToMany(Agente::class);

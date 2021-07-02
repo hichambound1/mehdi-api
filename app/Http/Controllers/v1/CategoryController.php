@@ -39,11 +39,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            $request->validate([
+                'name' => 'required',
+                'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
-        ]);
+            ]);
 
         return Category::create($request->all());
     }

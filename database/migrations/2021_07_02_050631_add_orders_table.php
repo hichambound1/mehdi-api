@@ -18,10 +18,8 @@ class AddOrdersTable extends Migration
             $table->text('description');
             $table->integer('nbr_hours');
             $table->integer('prix_total');
-            $table->integer('nbr_workers');
             $table->string('time');
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('category_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

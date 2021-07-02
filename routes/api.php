@@ -3,6 +3,7 @@
 use App\Http\Controllers\v1\AgenteController;
 use App\Http\Controllers\v1\AuthController;
 use App\Http\Controllers\v1\CategoryController;
+use App\Http\Controllers\v1\OrderController;
 use App\Http\Controllers\v1\SousCategoryController;
 use App\Http\Controllers\v1\WorkhourController;
 use Illuminate\Http\Request;
@@ -19,29 +20,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// public categories routes
-Route::get('/categories', [CategoryController::class, 'index']);
-Route::get('/categories/{id}', [CategoryController::class, 'show']);
+        // public categories routes
+        Route::get('/categories', [CategoryController::class, 'index']);
+        Route::get('/categories/{id}', [CategoryController::class, 'show']);
 
 
-// public souscategories routes
-Route::get('/souscategories', [SousCategoryController::class, 'index']);
-Route::get('/souscategories/{id}', [SousCategoryController::class, 'show']);
+        // public souscategories routes
+        Route::get('/souscategories', [SousCategoryController::class, 'index']);
+        Route::get('/souscategories/{id}', [SousCategoryController::class, 'show']);
 
 
-// public work hours routes
-Route::get('/workhours', [WorkhourController::class, 'index']);
-Route::get('/workhours/{id}', [WorkhourController::class, 'show']);
+        // public work hours routes
+        Route::get('/workhours', [WorkhourController::class, 'index']);
+        Route::get('/workhours/{id}', [WorkhourController::class, 'show']);
 
 
-// public agentes routes
-Route::get('/agentes', [AgenteController::class, 'index']);
-Route::get('/agentes/{id}', [AgenteController::class, 'show']);
+        // public agentes routes
+        Route::get('/agentes', [AgenteController::class, 'index']);
+        Route::get('/agentes/{id}', [AgenteController::class, 'show']);
+
+        // public orders routes
+        Route::post('/orders', [OrderController::class, 'store']);
+        Route::get('/orders', [OrderController::class, 'index']);
+        Route::get('/orders/{id}', [OrderController::class, 'show']);
 
 
-// public auth routes
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+        // public auth routes
+        Route::post('/register', [AuthController::class, 'register']);
+        Route::post('/login', [AuthController::class, 'login']);
 
 // private routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -50,6 +56,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('/agentes/{id}', [AgenteController::class, 'destroy']);
     Route::post('/agentes', [AgenteController::class, 'store']);
     Route::put('/agentes/{id}', [AgenteController::class, 'update']);
+
+// private orders routes
+    Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
+    // Route::put('/orders/{id}', [OrderController::class, 'update']);
+
 // private work hour routes
 
     Route::post('/workhours', [WorkhourController::class, 'store']);

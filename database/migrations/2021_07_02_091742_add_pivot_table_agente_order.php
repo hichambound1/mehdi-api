@@ -13,7 +13,7 @@ class AddPivotTableAgenteOrder extends Migration
      */
     public function up()
     {
-        Schema::create('agente_order', function (Blueprint $table) {
+        Schema::create('agente_orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('agente_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
